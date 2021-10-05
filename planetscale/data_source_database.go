@@ -59,7 +59,7 @@ func dataSourceDatabases() *schema.Resource {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
-						"last_updated": {
+						"updated_at": {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
@@ -108,8 +108,8 @@ func flattenDatabases(databases []*ps.Database) (values []map[string]interface{}
 					"enabled":  strconv.FormatBool(database.Region.Enabled),
 					"location": database.Region.Location,
 				},
-				"updated_at": database.UpdatedAt.String(),
 				"created_at": database.CreatedAt.String(),
+				"updated_at": database.UpdatedAt.String(),
 			}
 			values = append(values, v)
 		}

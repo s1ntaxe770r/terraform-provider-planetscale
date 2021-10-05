@@ -98,7 +98,6 @@ func dataSourceDatabaseRead(d *schema.ResourceData, m interface{}) error {
 		return errors.New(err.Error())
 	}
 	d.SetId(strconv.FormatInt(time.Now().Unix(), 10))
-
 	return nil
 }
 

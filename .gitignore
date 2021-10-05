@@ -1,3 +1,6 @@
  .env
 .vscode/
 db.json
+terraform.tfstate 
+.terraform.lock.hcl
+examples/terraform.tfstate

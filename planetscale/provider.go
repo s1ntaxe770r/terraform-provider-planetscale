@@ -21,8 +21,9 @@ func Provider() terraform.ResourceProvider {
 		ConfigureFunc: configureProvider,
 		ResourcesMap:  map[string]*schema.Resource{},
 		DataSourcesMap: map[string]*schema.Resource{
-			"planetscale_databases": dataSourceDatabases(),
-			"planetscale_database":  dataSourceDatabase(),
+			"planetscale_databases":     dataSourceDatabases(),
+			"planetscale_database":      dataSourceDatabase(),
+			"planetscale_organizations": dataSourceOrganizations(),
 		},
 	}
 }

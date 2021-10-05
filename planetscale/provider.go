@@ -1,7 +1,8 @@
 package planetscale
 
 import (
-	"log"
+	"errors"
+	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/terraform"
@@ -29,8 +30,7 @@ func configureProvider(d *schema.ResourceData) (interface{}, error) {
 	access_token := d.Get("access_token")
 	c, err := planetscale.NewClient(planetscale.WithAccessToken(access_token.(string)))
 	if err != nil {
-		log.Fatalf("Unable to create planetscale client  %s", err.Error())
-		return nil, err
+		return nil, errors.New(fmt.Sprintf("unable to create planetscale client, %s", err.Error()))
 	}
 	return c, nil
 }

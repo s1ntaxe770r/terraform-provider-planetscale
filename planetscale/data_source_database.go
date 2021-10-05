@@ -10,15 +10,19 @@ import (
 	ps "github.com/planetscale/planetscale-go/planetscale"
 )
 
-func dataSourceDatabases() *schema.Resource {
+func dataSourceDatabase() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceDatabasesRead,
+		Read: dataSourceDatabaseRead,
 		Schema: map[string]*schema.Schema{
 			"organization": {
 				Type:     schema.TypeString,
 				Required: true,
 			},
-			"databases": {
+			"database": {
+				Type:     schema.TypeString,
+				Required: true,
+			},
+			"db": {
 				Type:     schema.TypeList,
 				Computed: true,
 				Elem: &schema.Resource{
@@ -70,49 +74,49 @@ func dataSourceDatabases() *schema.Resource {
 	}
 }
 
-func dataSourceDatabasesRead(d *schema.ResourceData, m interface{}) error {
+func dataSourceDatabaseRead(d *schema.ResourceData, m interface{}) error {
 	client := m.(*ps.Client)
-	dbctx := context.Background()
+	ctx := context.Background()
 	organization, ok := d.GetOk("organization")
 	if !ok || (organization.(string) == "") {
 		return errors.New("required value organization not set")
 	}
+	db, ok := d.GetOk("database")
+	if !ok || (db.(string) == "") {
+		return errors.New("required value database not set")
+	}
 
-	databaselist, err := client.Databases.List(dbctx, &ps.ListDatabasesRequest{
+	databaseresp, err := client.Databases.Get(ctx, &ps.GetDatabaseRequest{
 		Organization: organization.(string),
+		Database:     db.(string),
 	})
 	if err != nil {
-		return err
+		return errors.New(err.Error())
 	}
-	databases := make([]map[string]interface{}, 0)
-	for _, db := range flattenDatabases(databaselist) {
-		databases = append(databases, db)
-	}
-	if err := d.Set("databases", databases); err != nil {
-		return err
+
+	if err := d.Set("db", flattenDatabase(databaseresp)); err != nil {
+		return errors.New(err.Error())
 	}
 	d.SetId(strconv.FormatInt(time.Now().Unix(), 10))
 
 	return nil
 }
 
-func flattenDatabases(databases []*ps.Database) (values []map[string]interface{}) {
-	if databases != nil {
-		for _, database := range databases {
-			v := map[string]interface{}{
-				"name":  database.Name,
-				"notes": database.Notes,
-				"region": map[string]interface{}{
-					"name":     database.Region.Name,
-					"slug":     database.Region.Slug,
-					"enabled":  strconv.FormatBool(database.Region.Enabled),
-					"location": database.Region.Location,
-				},
-				"created_at": database.CreatedAt.String(),
-				"updated_at": database.UpdatedAt.String(),
-			}
-			values = append(values, v)
+func flattenDatabase(database *ps.Database) (value []map[string]interface{}) {
+	if database != nil {
+		v := map[string]interface{}{
+			"name":  database.Name,
+			"notes": database.Notes,
+			"region": map[string]interface{}{
+				"name":     database.Region.Name,
+				"slug":     database.Region.Slug,
+				"enabled":  strconv.FormatBool(database.Region.Enabled),
+				"location": database.Region.Location,
+			},
+			"created_at": database.CreatedAt.String(),
+			"updated_at": database.UpdatedAt.String(),
 		}
+		value = append(value, v)
 	}
-	return values
+	return value
 }

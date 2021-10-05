@@ -14,7 +14,7 @@ func Provider() terraform.ResourceProvider {
 		Schema: map[string]*schema.Schema{
 			"access_token": {
 				Type:        schema.TypeString,
-				Optional:    true,
+				Required:    true,
 				DefaultFunc: schema.EnvDefaultFunc("PLANETSCALE_TOKEN", nil),
 			},
 		},
@@ -22,6 +22,7 @@ func Provider() terraform.ResourceProvider {
 		ResourcesMap:  map[string]*schema.Resource{},
 		DataSourcesMap: map[string]*schema.Resource{
 			"planetscale_databases": dataSourceDatabases(),
+			"planetscale_database":  dataSourceDatabase(),
 		},
 	}
 }

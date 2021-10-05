@@ -4,3 +4,8 @@ db.json
 terraform.tfstate 
 .terraform.lock.hcl
 examples/terraform.tfstate
+examples/.terraform.lock.hcl
+exmaples/terraform.tfstate.backup
+
+
+

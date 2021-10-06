@@ -7,7 +7,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-const regionsAPIPath = "v1/regions"	
+const regionsAPIPath = "v1/regions"
 
 type Region struct {
 	Slug     string `json:"slug"`

@@ -15,16 +15,19 @@ func dataSourceDatabase() *schema.Resource {
 		Read: dataSourceDatabaseRead,
 		Schema: map[string]*schema.Schema{
 			"organization": {
-				Type:     schema.TypeString,
-				Required: true,
+				Type:        schema.TypeString,
+				Description: "organization from which terraform will read databases from",
+				Required:    true,
 			},
-			"database": {
-				Type:     schema.TypeString,
-				Required: true,
+			"name": {
+				Type:        schema.TypeString,
+				Description: "name of the database to be fetch",
+				Required:    true,
 			},
 			"db": {
-				Type:     schema.TypeList,
-				Computed: true,
+				Type:        schema.TypeList,
+				Description: "database returned",
+				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": {
@@ -93,7 +96,6 @@ func dataSourceDatabaseRead(d *schema.ResourceData, m interface{}) error {
 	if err != nil {
 		return errors.New(err.Error())
 	}
-
 	if err := d.Set("db", flattenDatabase(databaseresp)); err != nil {
 		return errors.New(err.Error())
 	}

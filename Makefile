@@ -3,7 +3,7 @@ HOSTNAME=jubril.me
 NAMESPACE=edu
 NAME=planetscale
 BINARY=terraform-provider-${NAME}
-VERSION=0.1.0
+VERSION=0.1.1
 OS_ARCH=darwin_amd64
 
 build:

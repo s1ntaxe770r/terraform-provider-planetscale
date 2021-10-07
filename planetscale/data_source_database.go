@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	ps "github.com/planetscale/planetscale-go/planetscale"
 )
 
@@ -24,54 +24,23 @@ func dataSourceDatabase() *schema.Resource {
 				Description: "name of the database to be fetch",
 				Required:    true,
 			},
-			"db": {
-				Type:        schema.TypeList,
-				Description: "database returned",
+			"notes": {
+				Type:        schema.TypeString,
+				Description: "notes assosicated with this database",
 				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"name": {
-							Type:     schema.TypeString,
-							Computed: true,
-						},
-						"notes": {
-							Type:     schema.TypeString,
-							Computed: true,
-						},
-						"region": {
-							Type:     schema.TypeMap,
-							Computed: true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"slug": {
-										Type:     schema.TypeString,
-										Computed: true,
-									},
-									"display_name": {
-										Type:     schema.TypeString,
-										Computed: true,
-									},
-									"location": {
-										Type:     schema.TypeString,
-										Computed: true,
-									},
-									"enabled": {
-										Type:     schema.TypeString,
-										Computed: true,
-									},
-								},
-							},
-						},
-						"created_at": {
-							Type:     schema.TypeString,
-							Computed: true,
-						},
-						"updated_at": {
-							Type:     schema.TypeString,
-							Computed: true,
-						},
-					},
-				},
+			},
+			"region": {
+				Type:     schema.TypeMap,
+				Computed: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
+			"created_at": {
+				Type:     schema.TypeString,
+				Computed: true,
+			},
+			"updated_at": {
+				Type:     schema.TypeString,
+				Computed: true,
 			},
 		},
 	}
@@ -84,7 +53,7 @@ func dataSourceDatabaseRead(d *schema.ResourceData, m interface{}) error {
 	if !ok || (organization.(string) == "") {
 		return errors.New("required value organization not set")
 	}
-	db, ok := d.GetOk("database")
+	db, ok := d.GetOk("name")
 	if !ok || (db.(string) == "") {
 		return errors.New("required value database not set")
 	}
@@ -96,7 +65,16 @@ func dataSourceDatabaseRead(d *schema.ResourceData, m interface{}) error {
 	if err != nil {
 		return errors.New(err.Error())
 	}
-	if err := d.Set("db", flattenDatabase(databaseresp)); err != nil {
+	if err := d.Set("region", flattenRegion(&databaseresp.Region)); err != nil {
+		return errors.New(err.Error())
+	}
+	if err := d.Set("notes", databaseresp.Notes); err != nil {
+		return errors.New(err.Error())
+	}
+	if err := d.Set("created_at", databaseresp.CreatedAt.String()); err != nil {
+		return errors.New(err.Error())
+	}
+	if err := d.Set("updated_at", databaseresp.UpdatedAt.String()); err != nil {
 		return errors.New(err.Error())
 	}
 	d.SetId(strconv.FormatInt(time.Now().Unix(), 10))
@@ -118,6 +96,19 @@ func flattenDatabase(database *ps.Database) (value []map[string]interface{}) {
 			"updated_at": database.UpdatedAt.String(),
 		}
 		value = append(value, v)
+	}
+	return value
+}
+
+func flattenRegion(region *ps.Region) (value map[string]string) {
+	if region != nil {
+		v := map[string]string{
+			"name":     region.Name,
+			"slug":     region.Slug,
+			"enabled":  strconv.FormatBool(region.Enabled),
+			"location": region.Location,
+		}
+		value = v
 	}
 	return value
 }

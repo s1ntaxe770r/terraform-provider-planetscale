@@ -1,7 +1,7 @@
 Unofficial Terraform Provider for Planetscale :rocket:
 ==================
 - Website: https://planetscale.com
-- Documentation: comming soon
+- Documentation: https://registry.terraform.io/providers/s1ntaxe770r/planetscale/latest
 
 
 
@@ -14,14 +14,14 @@ Requirements
 Using the provider
 ----------------------
 
-See the [provider documentation]() to get started
+See the [provider documentation](https://registry.terraform.io/providers/s1ntaxe770r/planetscale/latest) to get started
 
 
 Contributing 
 -------------
 - Fork and clone this repo
 - Run `make install` 
-- Make and test your changes 
+- Make and test your changes  `cd examples && make apply`
 - Submit a PR!
 
 Checkout the [roadmap](https://github.com/s1ntaxe770r/terraform-provider-planetscale/projects/2) for features i plan to add

@@ -47,5 +47,3 @@ Read-Only:
 - **notes** (String)
 - **region** (Map of String)
 - **updated_at** (String)
-
-

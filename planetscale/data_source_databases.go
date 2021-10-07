@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	ps "github.com/planetscale/planetscale-go/planetscale"
 )
 
@@ -34,26 +34,7 @@ func dataSourceDatabases() *schema.Resource {
 						"region": {
 							Type:     schema.TypeMap,
 							Computed: true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"slug": {
-										Type:     schema.TypeString,
-										Computed: true,
-									},
-									"display_name": {
-										Type:     schema.TypeString,
-										Computed: true,
-									},
-									"location": {
-										Type:     schema.TypeString,
-										Computed: true,
-									},
-									"enabled": {
-										Type:     schema.TypeString,
-										Computed: true,
-									},
-								},
-							},
+							Elem:     &schema.Schema{Type: schema.TypeString},
 						},
 						"created_at": {
 							Type:     schema.TypeString,

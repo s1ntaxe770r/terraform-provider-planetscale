@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     planetscale = {
-      version = "0.3.1"
+      version = "0.1.0"
       source = "jubril.me/edu/planetscale"
     }
   }
@@ -18,21 +18,19 @@ provider "planetscale" {
 data "planetscale_databases" "all" {
   organization = "gophercorp"
 }
-data "planetscale_database" "one"{
+data "planetscale_database" "db"{
   organization = "gophercorp"
   name = "express"
 }
 
-data "planetscale_organizations" "orgs" {
-  
-}
+data "planetscale_organizations" "orgs" {}
 
 output "all_databases" {
   value = data.planetscale_databases.all.databases  
 }
 
 output "database" {
-  value = data.planetscale_database.one.region
+  value = data.planetscale_database.db.region
 }
 output "organizations" {
   value = data.planetscale_organizations.orgs.organizations

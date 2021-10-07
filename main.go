@@ -3,7 +3,7 @@ package main
 import (
 	"terraform-provider-planetscale/planetscale"
 
-	"github.com/hashicorp/terraform-plugin-sdk/plugin"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
 )
 
 func main() {

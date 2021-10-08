@@ -14,6 +14,7 @@ func Provider() *schema.Provider {
 			"access_token": {
 				Type:        schema.TypeString,
 				Required:    true,
+				Sensitive:   true,
 				DefaultFunc: schema.EnvDefaultFunc("PLANETSCALE_TOKEN", nil),
 			},
 		},

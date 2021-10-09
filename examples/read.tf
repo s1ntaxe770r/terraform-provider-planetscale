@@ -40,3 +40,13 @@ resource "planetscale_database" "primarydb"{
   organization = "gophercorp"
   name = "tftest"
 }
+
+resource "planetscale_service_token" "pscale_token" {
+  organization = "gophercorp"
+}
+
+
+# output "token_id" {
+#   value = planetscale_service_token.pscale_token.id 
+# }
+

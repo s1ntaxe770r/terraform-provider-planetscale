@@ -15,6 +15,7 @@ Using the provider
 ----------------------
 
 See the [provider documentation](https://registry.terraform.io/providers/s1ntaxe770r/planetscale/latest) to get started
+Or this [repo](https://github.com/s1ntaxe770r/tf-planetscale-db) with a full example
 
 
 Contributing 

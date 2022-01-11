@@ -6,5 +6,4 @@ terraform.tfstate
 examples/terraform.tfstate
 examples/.terraform.lock.hcl
 exmaples/terraform.tfstate.backup
-
-
+.DS_Store

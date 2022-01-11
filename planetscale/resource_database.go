@@ -53,6 +53,11 @@ func resourceDatabase() *schema.Resource {
 							Computed: true,
 							Elem:     &schema.Schema{Type: schema.TypeString},
 						},
+						"state": {
+							Type:        schema.TypeString,
+							Description: "represents the state of a database",
+							Computed:    true,
+						},
 						"created_at": {
 							Type:     schema.TypeString,
 							Computed: true,

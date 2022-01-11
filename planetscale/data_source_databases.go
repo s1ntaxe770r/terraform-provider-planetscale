@@ -36,6 +36,11 @@ func dataSourceDatabases() *schema.Resource {
 							Computed: true,
 							Elem:     &schema.Schema{Type: schema.TypeString},
 						},
+						"state": {
+							Type:        schema.TypeString,
+							Computed:    true,
+							Description: "represents the state of a database",
+						},
 						"created_at": {
 							Type:     schema.TypeString,
 							Computed: true,
@@ -88,6 +93,7 @@ func flattenDatabases(databases []*ps.Database) (values []map[string]interface{}
 					"enabled":  strconv.FormatBool(database.Region.Enabled),
 					"location": database.Region.Location,
 				},
+				"state":      string(database.State),
 				"created_at": database.CreatedAt.String(),
 				"updated_at": database.UpdatedAt.String(),
 			}

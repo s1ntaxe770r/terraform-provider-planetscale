@@ -2,7 +2,7 @@ terraform {
   required_providers {
     planetscale = {
       version = "0.1.1"
-      source = "jubril.me/edu/planetscale"
+      source  = "jubril.me/edu/planetscale"
     }
   }
 }
@@ -36,9 +36,9 @@ provider "planetscale" {
 #   value = data.planetscale_organizations.orgs.organizations
 # }
 
-resource "planetscale_database" "primarydb"{
+resource "planetscale_database" "primarydb" {
   organization = "gophercorp"
-  name = "tftest"
+  name         = "tftest"
 }
 
 

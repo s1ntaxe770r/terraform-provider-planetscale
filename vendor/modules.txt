@@ -6,6 +6,8 @@ github.com/apparentlymart/go-textseg/v12/textseg
 github.com/apparentlymart/go-textseg/v13/textseg
 # github.com/fatih/color v1.7.0
 github.com/fatih/color
+# github.com/go-sql-driver/mysql v1.6.0
+## explicit
 # github.com/golang/protobuf v1.4.2
 github.com/golang/protobuf/proto
 github.com/golang/protobuf/protoc-gen-go/descriptor
@@ -88,7 +90,7 @@ github.com/mitchellh/reflectwalk
 github.com/oklog/run
 # github.com/pkg/errors v0.9.1
 github.com/pkg/errors
-# github.com/planetscale/planetscale-go v0.47.0
+# github.com/planetscale/planetscale-go v0.52.0
 ## explicit
 github.com/planetscale/planetscale-go/planetscale
 # github.com/vmihailenco/msgpack v4.0.4+incompatible

@@ -15,38 +15,30 @@ variable "planetscale_token" {
 provider "planetscale" {
   access_token = var.planetscale_token
 }
-data "planetscale_databases" "all" {
-  organization = "gophercorp"
-}
-data "planetscale_database" "db"{
-  organization = "gophercorp"
-  name = "express"
-}
+# data "planetscale_databases" "all" {
+#   organization = "gophercorp"
+# }
+# data "planetscale_database" "db"{
+#   organization = "gophercorp"
+#   name = "init"
+# }
 
-data "planetscale_organizations" "orgs" {}
+# data "planetscale_organizations" "orgs" {}
 
-output "all_databases" {
-  value = data.planetscale_databases.all.databases  
-}
+# output "all_databases" {
+#   value = data.planetscale_databases.all.databases  
+# }
 
-output "database" {
-  value = data.planetscale_database.db.region
-}
-output "organizations" {
-  value = data.planetscale_organizations.orgs.organizations
-}
+# output "database" {
+#   value = data.planetscale_database.db.region
+# }
+# output "organizations" {
+#   value = data.planetscale_organizations.orgs.organizations
+# }
 
 resource "planetscale_database" "primarydb"{
   organization = "gophercorp"
   name = "tftest"
 }
 
-resource "planetscale_service_token" "pscale_token" {
-  organization = "gophercorp"
-}
-
-
-# output "token_id" {
-#   value = planetscale_service_token.pscale_token.id 
-# }
 

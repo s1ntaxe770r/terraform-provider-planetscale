@@ -13,7 +13,7 @@ The database resource allows you to create a Planetscale database
 ## Example Usage
 
 ```terraform
-data "planetscale_database" "db"{
+resource "planetscale_database" "db"{
   organization = "exampleorg"
   name = "exampledb"
 }

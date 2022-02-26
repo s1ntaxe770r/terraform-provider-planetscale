@@ -21,8 +21,9 @@ func Provider() *schema.Provider {
 		},
 		ConfigureContextFunc: configureProvider,
 		ResourcesMap: map[string]*schema.Resource{
-			"planetscale_database": resourceDatabase(),
-			"planetscale_branch":   resourceBranch(),
+			"planetscale_database":        resourceDatabase(),
+			"planetscale_branch":          resourceBranch(),
+			"planetscale_branch_password": resourceBranchPassword(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"planetscale_databases":     dataSourceDatabases(),

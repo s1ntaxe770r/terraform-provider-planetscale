@@ -3,7 +3,6 @@ module terraform-provider-planetscale
 go 1.16
 
 require (
-	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/hashicorp/hcl/v2 v2.8.2 // indirect
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.7.1
 	github.com/mattn/go-colorable v0.1.8 // indirect

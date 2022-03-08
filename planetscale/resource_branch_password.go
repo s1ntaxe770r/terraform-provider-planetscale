@@ -188,10 +188,11 @@ func resourceBranchPasswordRead(d *schema.ResourceData, m interface{}) error {
 	if err != nil {
 		return errors.New("unable to create password " + err.Error())
 	}
-	err = d.Set("password", password.PlainText)
-	if err != nil {
-		return errors.New("unable to create password " + err.Error())
-	}
+
+	// passwords can not be displayed after creation
+	// I will remain this block to prevent others to add a similar statement
+	// err = d.Set("password", password.PlainText)
+
 	err = d.Set("created_at", password.CreatedAt.String())
 	if err != nil {
 		return errors.New("unable to create password " + err.Error())

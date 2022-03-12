@@ -31,6 +31,8 @@ I built this provider to answer one simple question. How hard could it be? Well 
 
 This provider wouldn't be possible without the amazing [client library](https://github.com/planetscale/planetscale-go) planetscale provides, i would have spent days trying to mock api requests without it.
  
-If you found this cool pls leave a star for dopamine 
+If you found this cool pls leave a star for dopamine or consider buying me a coffee :)
+
+<a href="https://www.buymeacoffee.com/s1ntaxe770r" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 

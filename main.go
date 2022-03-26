@@ -5,7 +5,8 @@ import (
 	"flag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"log"
-	"terraform-provider-planetscale/planetscale"
+
+	"github.com/s1ntaxe770r/terraform-provider-planetscale/planetscale"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
 )

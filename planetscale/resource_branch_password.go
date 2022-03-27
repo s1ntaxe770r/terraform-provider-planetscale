@@ -3,9 +3,10 @@ package planetscale
 import (
 	"context"
 	"errors"
+	"strings"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	ps "github.com/planetscale/planetscale-go/planetscale"
-	"strings"
 )
 
 func resourceBranchPassword() *schema.Resource {

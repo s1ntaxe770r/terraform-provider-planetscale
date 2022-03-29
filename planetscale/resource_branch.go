@@ -12,69 +12,72 @@ import (
 func resourceBranch() *schema.Resource {
 
 	return &schema.Resource{
+		Description: "A branch of the database.",
+
 		Create: resourceBranchCreate,
 		Read:   resourceBranchRead,
 		Delete: resourceBranchDelete,
 		Schema: map[string]*schema.Schema{
 			"organization": {
 				Type:        schema.TypeString,
-				Description: "organization to create database under",
+				Description: "The organization in which the resource belongs.",
 				Required:    true,
 				ForceNew:    true,
 			},
 			"database": {
 				Type:        schema.TypeString,
-				Description: "display name of your database",
+				Description: "The database that the branch belongs to.",
 				Required:    true,
 				ForceNew:    true,
 			},
 			"parent_branch": {
 				Type:        schema.TypeString,
-				Description: "parent branch of your branch",
+				Description: "The parent branch that the branch is branched from. Default is main.",
 				Optional:    true,
 				ForceNew:    true,
 			},
 			"name": {
 				Type:        schema.TypeString,
-				Description: "branch name of your database",
+				Description: "The name of the branch.",
 				Required:    true,
 				ForceNew:    true,
 			},
 			"backup_id": {
 				Type:        schema.TypeString,
-				Description: "backup id for your branch name",
+				Description: "The ID of the backup that the branch is branched from.",
 				Optional:    true,
 				ForceNew:    true,
 			},
 			"branch": {
 				Type:        schema.TypeList,
-				Description: "data returned by the create database",
+				Description: "The branch.",
 				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Description: "display name of your database",
+							Description: "The name of the branch.",
 							Computed:    true,
 						},
 						"parent_branch": {
 							Type:        schema.TypeString,
-							Description: "display parent branch of your branch",
+							Description: "The parent branch that the branch is branched from. Default is main.",
 							Computed:    true,
 						},
 						"region": {
-							Type:     schema.TypeMap,
-							Computed: true,
-							Elem:     &schema.Schema{Type: schema.TypeString},
+							Type:        schema.TypeMap,
+							Description: "The region the branch is in.",
+							Computed:    true,
+							Elem:        &schema.Schema{Type: schema.TypeString},
 						},
 						"ready": {
 							Type:        schema.TypeBool,
-							Description: "represents the readiness of branch",
+							Description: "Whether the branch is ready.",
 							Computed:    true,
 						},
 						"production": {
 							Type:        schema.TypeBool,
-							Description: "represents the type of branch",
+							Description: "Whether the branch is a production branch. ",
 							Computed:    true,
 						},
 						"created_at": {
@@ -86,8 +89,9 @@ func resourceBranch() *schema.Resource {
 							Computed: true,
 						},
 						"access_host_url": {
-							Type:     schema.TypeString,
-							Computed: true,
+							Description: "The host used to connect to the database and branch.",
+							Type:        schema.TypeString,
+							Computed:    true,
 						},
 					},
 				},

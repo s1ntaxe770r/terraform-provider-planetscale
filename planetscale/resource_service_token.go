@@ -11,24 +11,27 @@ import (
 
 func resourceServiceToken() *schema.Resource {
 	return &schema.Resource{
+		Description: "Service tokens are used to access the PlanetScale API.",
+
 		Create: ServiceTokenCreate,
 		Delete: ServiceTokenDelete,
 		Read:   ServiceTokenRead,
 		Schema: map[string]*schema.Schema{
 			"organization": {
-				Type:     schema.TypeString,
-				ForceNew: true,
-				Required: true,
+				Type:        schema.TypeString,
+				Description: "The organization in which the resource belongs.",
+				ForceNew:    true,
+				Required:    true,
 			},
 			"token": {
 				Type:        schema.TypeString,
-				Description: "token returned upon creation. Pls note this a sensitive",
+				Description: "The service token.",
 				Computed:    true,
 				Sensitive:   true,
 			},
 			"id": {
 				Type:        schema.TypeString,
-				Description: "id of the token created",
+				Description: "The ID of the service token.",
 				Computed:    true,
 			},
 		},

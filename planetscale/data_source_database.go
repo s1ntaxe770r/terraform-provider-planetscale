@@ -12,31 +12,34 @@ import (
 
 func dataSourceDatabase() *schema.Resource {
 	return &schema.Resource{
+		Description: "Retrieve a database by name.",
+
 		Read: dataSourceDatabaseRead,
 		Schema: map[string]*schema.Schema{
 			"organization": {
 				Type:        schema.TypeString,
-				Description: "organization from which terraform will read databases from",
+				Description: "The organization in which the resource belongs.",
 				Required:    true,
 			},
 			"name": {
 				Type:        schema.TypeString,
-				Description: "name of the database to be fetch",
+				Description: "The name of the database.",
 				Required:    true,
 			},
 			"notes": {
 				Type:        schema.TypeString,
-				Description: "notes assosicated with this database",
+				Description: "A description of the database.",
 				Computed:    true,
 			},
 			"region": {
-				Type:     schema.TypeMap,
-				Computed: true,
-				Elem:     &schema.Schema{Type: schema.TypeString},
+				Type:        schema.TypeMap,
+				Description: "The region the database.",
+				Computed:    true,
+				Elem:        &schema.Schema{Type: schema.TypeString},
 			},
 			"state": {
 				Type:        schema.TypeString,
-				Description: "represents the state of a database",
+				Description: "The state of the database instance.",
 				Computed:    true,
 			},
 			"created_at": {

@@ -3,20 +3,21 @@
 page_title: "planetscale_database Resource - terraform-provider-planetscale"
 subcategory: ""
 description: |-
-The database resource allows you to create a Planetscale database
+  A PlanetScale database.
 ---
 
 # planetscale_database (Resource)
-The database resource allows you to create a Planetscale database
 
+A PlanetScale database.
 
 ## Example Usage
 
 ```terraform
-resource "planetscale_database" "db"{
+resource "planetscale_database" "db" {
   organization = "exampleorg"
-  name = "exampledb"
+  name         = "exampledb"
 }
+
 output "database" {
   value = data.planetscale_database.db.region
 }
@@ -27,23 +28,28 @@ output "database" {
 
 ### Required
 
-- **name** (String) display name of your database
-- **organization** (String) organization to create database under
+- `name` (String) The name of the database.
+- `organization` (String) The organization in which the resource belongs.
 
 ### Optional
-- **notes** (String) Optional notes
+
+- `id` (String) The ID of this resource.
+- `notes` (String) A description of the database.
 
 ### Read-Only
 
-- **database** (List of Object) data returned by the create database (see [below for nested schema](#nestedatt--database))
+- `database` (List of Object) The database. (see [below for nested schema](#nestedatt--database))
 
 <a id="nestedatt--database"></a>
 ### Nested Schema for `database`
 
 Read-Only:
 
-- **created_at** (String)
-- **name** (String)
-- **notes** (String)
-- **region** (Map of String)
-- **updated_at** (String)
+- `created_at` (String)
+- `name` (String)
+- `notes` (String)
+- `region` (Map of String)
+- `state` (String)
+- `updated_at` (String)
+
+

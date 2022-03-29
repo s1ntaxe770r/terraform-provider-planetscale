@@ -10,52 +10,55 @@ import (
 
 func resourceDatabase() *schema.Resource {
 	return &schema.Resource{
+		Description: "A PlanetScale database.",
+
 		Create: resourceDatabaseCreate,
 		Read:   resourceDatabaseRead,
 		Delete: resourceDatabaseDelete,
 		Schema: map[string]*schema.Schema{
 			"organization": {
 				Type:        schema.TypeString,
-				Description: "organization to create database under",
+				Description: "The organization in which the resource belongs.",
 				Required:    true,
 				ForceNew:    true,
 			},
 			"name": {
 				Type:        schema.TypeString,
-				Description: "display name of your database",
+				Description: "The name of the database.",
 				Required:    true,
 				ForceNew:    true,
 			},
 			"notes": {
 				Type:        schema.TypeString,
-				Description: "Optional notes",
+				Description: "A description of the database.",
 				Optional:    true,
 				ForceNew:    true,
 			},
 			"database": {
 				Type:        schema.TypeList,
-				Description: "data returned by the create database",
+				Description: "The database.",
 				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": {
 							Type:        schema.TypeString,
-							Description: "display name of your database",
+							Description: "The name of the database.",
 							Computed:    true,
 						},
 						"notes": {
 							Type:        schema.TypeString,
-							Description: "Optional notes",
+							Description: "A description of the database.",
 							Computed:    true,
 						},
 						"region": {
-							Type:     schema.TypeMap,
-							Computed: true,
-							Elem:     &schema.Schema{Type: schema.TypeString},
+							Type:        schema.TypeMap,
+							Description: "The region the database will sit in.",
+							Computed:    true,
+							Elem:        &schema.Schema{Type: schema.TypeString},
 						},
 						"state": {
 							Type:        schema.TypeString,
-							Description: "represents the state of a database",
+							Description: "The state of the database instance.",
 							Computed:    true,
 						},
 						"created_at": {

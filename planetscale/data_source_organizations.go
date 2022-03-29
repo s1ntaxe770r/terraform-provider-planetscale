@@ -12,6 +12,8 @@ import (
 
 func dataSourceOrganizations() *schema.Resource {
 	return &schema.Resource{
+		Description: "Retrieve the organizations that are accessible by the configured token.",
+
 		Read: dataSourceOrganizationsRead,
 		Schema: map[string]*schema.Schema{
 			"organizations": {
@@ -20,8 +22,9 @@ func dataSourceOrganizations() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": {
-							Type:     schema.TypeString,
-							Computed: true,
+							Type:        schema.TypeString,
+							Description: "The name of the organization.",
+							Computed:    true,
 						},
 						"created_at": {
 							Type:     schema.TypeString,

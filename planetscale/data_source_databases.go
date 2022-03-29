@@ -12,11 +12,14 @@ import (
 
 func dataSourceDatabases() *schema.Resource {
 	return &schema.Resource{
+		Description: "Retrieve the databases per organization.",
+
 		Read: dataSourceDatabasesRead,
 		Schema: map[string]*schema.Schema{
 			"organization": {
-				Type:     schema.TypeString,
-				Required: true,
+				Type:        schema.TypeString,
+				Description: "The organization in which the resources belong.",
+				Required:    true,
 			},
 			"databases": {
 				Type:     schema.TypeList,
@@ -24,22 +27,25 @@ func dataSourceDatabases() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": {
-							Type:     schema.TypeString,
-							Computed: true,
+							Type:        schema.TypeString,
+							Description: "The name of the database.",
+							Computed:    true,
 						},
 						"notes": {
-							Type:     schema.TypeString,
-							Computed: true,
+							Type:        schema.TypeString,
+							Description: "A description of the database.",
+							Computed:    true,
 						},
 						"region": {
-							Type:     schema.TypeMap,
-							Computed: true,
-							Elem:     &schema.Schema{Type: schema.TypeString},
+							Type:        schema.TypeMap,
+							Description: "The region the database.",
+							Computed:    true,
+							Elem:        &schema.Schema{Type: schema.TypeString},
 						},
 						"state": {
 							Type:        schema.TypeString,
+							Description: "The state of the database instance.",
 							Computed:    true,
-							Description: "represents the state of a database",
 						},
 						"created_at": {
 							Type:     schema.TypeString,

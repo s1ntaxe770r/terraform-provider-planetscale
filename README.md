@@ -1,27 +1,22 @@
-Unofficial Terraform Provider for Planetscale :rocket:
-==================
+# Unofficial Terraform Provider for Planetscale :rocket:
+
 - Website: https://planetscale.com
-- Documentation: https://registry.terraform.io/providers/s1ntaxe770r/planetscale/latest
+- Documentation: https://registry.terraform.io/providers/s1ntaxe770r/planetscale/lates
 
-
-
-Requirements
-------------
+## Requirements
 
 - [Terraform](https://www.terraform.io/downloads.html) 1.0+
 - Golang go1.16+
 
-Using the provider
-----------------------
+## Using the provider
 
 See the [provider documentation](https://registry.terraform.io/providers/s1ntaxe770r/planetscale/latest) to get started
 Or this [repo](https://github.com/s1ntaxe770r/tf-planetscale-db) with a full example
 
+## Contributing
 
-Contributing 
--------------
 - Fork and clone this repo
-- Run `make install` 
+- Run `make install`
 - Make and test your changes  `cd examples && make apply`
 - Submit a PR!
 
@@ -30,9 +25,7 @@ Checkout the [roadmap](https://github.com/s1ntaxe770r/terraform-provider-planets
 I built this provider to answer one simple question. How hard could it be? Well turns out it's not easy but the end result here has left me with a better appreciation for the work Hashicorp has put in to Terraform, I'm still not a 100% sure how everything works but at least I'm more educated than when i started.
 
 This provider wouldn't be possible without the amazing [client library](https://github.com/planetscale/planetscale-go) planetscale provides, i would have spent days trying to mock api requests without it.
- 
+
 If you found this cool pls leave a star for dopamine or consider buying me a coffee :)
 
 <a href="https://www.buymeacoffee.com/s1ntaxe770r" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
-
-

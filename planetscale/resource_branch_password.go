@@ -10,65 +10,65 @@ import (
 )
 
 func resourceBranchPassword() *schema.Resource {
-
 	return &schema.Resource{
+		Description: "The password that is used to connect to the database branch.",
+
 		Create: resourceBranchPasswordCreate,
 		Read:   resourceBranchPasswordRead,
 		Delete: resourceBranchPasswordDelete,
 		Schema: map[string]*schema.Schema{
 			"organization": {
 				Type:        schema.TypeString,
-				Description: "organization to create database under",
+				Description: "The organization in which the resource belongs.",
 				Required:    true,
 				ForceNew:    true,
 			},
 			"database": {
 				Type:        schema.TypeString,
-				Description: "display name of your database",
+				Description: "The database that the branch and password belongs to.",
 				Required:    true,
 				ForceNew:    true,
 			},
 			"branch": {
 				Type:        schema.TypeString,
-				Description: "display name of your branch",
+				Description: "The branch that the password belongs to.",
 				Optional:    true,
 				ForceNew:    true,
 			},
 			"name": {
 				Type:        schema.TypeString,
-				Description: "name of your password",
+				Description: "The name of the password.",
 				Required:    true,
 				ForceNew:    true,
 			},
 			"id": {
 				Type:        schema.TypeString,
-				Description: "id of your password",
+				Description: "The ID of the password.",
 				Computed:    true,
 				ForceNew:    false,
 			},
 			"created_at": {
-				Type:        schema.TypeString,
-				Description: "creation time of your password",
-				Computed:    true,
-				ForceNew:    false,
+				Type:     schema.TypeString,
+				Computed: true,
+				ForceNew: false,
 			},
 			"password": {
 				Type:        schema.TypeString,
-				Description: "your plain password",
+				Description: "The password used to connect to the database and branch.",
 				Sensitive:   true,
 				Computed:    true,
 				ForceNew:    false,
 			},
 			"username": {
 				Type:        schema.TypeString,
-				Description: "username to connect database through host",
+				Description: "The username used to connect to the database and branch.",
 				Sensitive:   false,
 				Computed:    true,
 				ForceNew:    false,
 			},
 			"host": {
 				Type:        schema.TypeString,
-				Description: "host to connect database branch",
+				Description: "The host used to connect to the database and branch.",
 				Sensitive:   false,
 				Computed:    true,
 				ForceNew:    false,

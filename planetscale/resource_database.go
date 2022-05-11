@@ -120,6 +120,18 @@ func resourceDatabaseRead(d *schema.ResourceData, m interface{}) error {
 		Database:     db.(string),
 	})
 	if err != nil {
+		// Note(turkenh): Handle "Not Found" gracefully
+		// From https://learn.hashicorp.com/tutorials/terraform/provider-setup#implement-read
+		// > When you create something in Terraform but delete it manually,
+		// > Terraform should gracefully handle it. If the API returns an error
+		// > when the resource doesn't exist, the read function should check to
+		// > see if the resource is available first. If the resource isn't
+		// > available, the function should set the ID to an empty string so
+		// > Terraform "destroys" the resource in state.
+		if psErr, ok := err.(*ps.Error); ok && psErr.Code == ps.ErrNotFound {
+			d.SetId("")
+			return nil
+		}
 		return errors.New(err.Error())
 	}
 	if err := d.Set("database", flattenDatabase(databaseresp)); err != nil {

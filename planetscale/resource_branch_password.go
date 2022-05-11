@@ -180,6 +180,11 @@ func resourceBranchPasswordRead(d *schema.ResourceData, m interface{}) error {
 		PasswordId:   id.(string),
 	})
 	if err != nil {
+		// Note(turkenh): Handle "Not Found" gracefully
+		if psErr, ok := err.(*ps.Error); ok && psErr.Code == ps.ErrNotFound {
+			d.SetId("")
+			return nil
+		}
 		return errors.New(err.Error())
 	}
 

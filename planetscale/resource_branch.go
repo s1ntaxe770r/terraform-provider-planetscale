@@ -161,6 +161,11 @@ func resourceBranchRead(d *schema.ResourceData, m interface{}) error {
 		Branch:       "",
 	})
 	if err != nil {
+		// Note(turkenh): Handle "Not Found" gracefully
+		if psErr, ok := err.(*ps.Error); ok && psErr.Code == ps.ErrNotFound {
+			d.SetId("")
+			return nil
+		}
 		return errors.New(err.Error())
 	}
 	if err := d.Set("branch", flattenBranch(branchReq)); err != nil {

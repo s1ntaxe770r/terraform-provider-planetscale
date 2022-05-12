@@ -1,7 +1,7 @@
 # Unofficial Terraform Provider for Planetscale :rocket:
 
 - Website: https://planetscale.com
-- Documentation: https://registry.terraform.io/providers/s1ntaxe770r/planetscale/lates
+- Documentation: https://registry.terraform.io/providers/s1ntaxe770r/planetscale/latest
 
 ## Requirements
 
